@@ -1,0 +1,80 @@
+<rdf:RDF
+ xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+ xmlns:z="http://www.zotero.org/namespaces/export#"
+ xmlns:dc="http://purl.org/dc/elements/1.1/"
+ xmlns:foaf="http://xmlns.com/foaf/0.1/"
+ xmlns:bib="http://purl.org/net/biblio#"
+ xmlns:dcterms="http://purl.org/dc/terms/"
+ xmlns:prism="http://prismstandard.org/namespaces/1.2/basic/"
+ xmlns:link="http://purl.org/rss/1.0/modules/link/">
+    <bib:Book rdf:about="urn:isbn:978-1-108-62542-5%20978-1-108-49433-5%20978-1-108-71438-9">
+        <z:itemType>book</z:itemType>
+        <dc:publisher>
+            <foaf:Organization>
+               <foaf:name>Cambridge University Press</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Magallanes Reyes</foaf:surname>
+                        <foaf:givenName>Jose Manuel</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dcterms:isReferencedBy rdf:resource="#item_6"/>
+        <dc:title>Data Visualization for Social and Policy Research: A Step-by-Step Approach Using R and Python</dc:title>
+        <dcterms:abstract>All social and policy researchers need to synthesize data into a visual representation. Producing good visualizations combines creativity and technique. This book teaches the techniques and basics to produce a variety of visualizations, allowing readers to communicate data and analyses in a creative and effective way. Visuals for tables, time series, maps, text, and networks are carefully explained and organized, showing how to choose the right plot for the type of data being analysed and displayed. Examples are drawn from public policy, public safety, education, political tweets, and public health. The presentation proceeds step by step, starting from the basics, in the programming languages R and Python so that readers learn the coding skills while simultaneously becoming familiar with the advantages and disadvantages of each visualization. No prior knowledge of either Python or R is required. Code for all the visualizations are available from the book's website.</dcterms:abstract>
+        <dc:date>2022-03-31</dc:date>
+        <z:shortTitle>Data Visualization for Social and Policy Research</z:shortTitle>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://www.cambridge.org/core/product/identifier/9781108625425/type/book</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-12-29 16:54:44</dcterms:dateSubmitted>
+        <dc:rights>https://www.cambridge.org/core/terms</dc:rights>
+        <dc:description>DOI: 10.1017/9781108625425</dc:description>
+        <dc:identifier>ISBN 978-1-108-62542-5 978-1-108-49433-5 978-1-108-71438-9</dc:identifier>
+        <prism:edition>1</prism:edition>
+    </bib:Book>
+    <bib:Memo rdf:about="#item_6">
+        <rdf:value>&lt;div data-schema-version=&quot;9&quot;&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(68, 68, 68)&quot;&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255)&quot;&gt;Aden-Buie G, Sievert C, Iannone R, Allaire J, Borges B (2024).&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;em&gt;&lt;span style=&quot;color: rgb(68, 68, 68)&quot;&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255)&quot;&gt;flexdashboard: R Markdown Format for Flexible Dashboards&lt;/span&gt;&lt;/span&gt;&lt;/em&gt;&lt;span style=&quot;color: rgb(68, 68, 68)&quot;&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255)&quot;&gt;. R package version 0.6.2.9000, https://github.com/rstudio/flexdashboard/,&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;span style=&quot;color: var(--pg-header)&quot;&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255)&quot;&gt;&lt;a href=&quot;https://pkgs.rstudio.com/flexdashboard/&quot; rel=&quot;noopener noreferrer nofollow&quot;&gt;https://pkgs.rstudio.com/flexdashboard/&lt;/a&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&quot;color: rgb(68, 68, 68)&quot;&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255)&quot;&gt;.&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;/div&gt;</rdf:value>
+    </bib:Memo>
+    <bib:Data rdf:about="https://pkgs.rstudio.com/flexdashboard/">
+        <z:itemType>computerProgram</z:itemType>
+        <z:programmers>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Garrick Aden-Buie.</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </z:programmers>
+        <link:link rdf:resource="#item_4"/>
+        <prism:edition>R package version 0.6.2.9000</prism:edition>
+        <dc:title>flexdashboard: R Markdown Format for Flexible Dashboards.</dc:title>
+        <dc:identifier>
+            <dcterms:URI>
+               <rdf:value>https://pkgs.rstudio.com/flexdashboard/</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+    </bib:Data>
+    <z:Attachment rdf:about="#item_4">
+        <z:itemType>attachment</z:itemType>
+        <dc:title>fkexdashboard</dc:title>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://pkgs.rstudio.com/flexdashboard/authors.html#citation</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-12-29 17:02:29</dcterms:dateSubmitted>
+        <z:linkMode>3</z:linkMode>
+    </z:Attachment>
+</rdf:RDF>

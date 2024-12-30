@@ -38,10 +38,9 @@ summary(eduwa$Student.Teacher.Ratio)
   base = ggplot (eduwa, aes (y=  Student.Teacher.Ratio))
 
 # Adding titles and  source :
-titleText='Teacher per student ratio '
+titleText='Large variability of teacher/stiudent ratio across WA?'
 sub_titleText='Washington State - 2019'
 sourceText='Source: US Department of Education'
-
 
   base =base + 
         geom_boxplot() +
@@ -268,13 +267,17 @@ viobox_ann=viobox +
         annotate(geom = 'text',
                 label=txt_Outliers_h,
                 y = upperT+60,
-                x=0.1,color='red',
-                angle=0)+
+                x=0.1,
+                color='red'
+                ,size =2 
+                , angle=0)+
         annotate(geom = 'text',
                 label=txt_Outliers_l,
                 y = lowerT -5,
-                x=0.1,color='red',
-                angle=0)+
+                x=0.1,
+                color='red'
+                ,size =2
+                ,angle=0)+
         geom_hline(yintercept = upperT,
                    color='purple',
                    linetype="dotted",
@@ -288,12 +291,14 @@ viobox_ann=viobox +
                  y = upperT+5,
                  x=0.2,
                  angle=0
+                 ,size =2
                  ,colour ='purple') +
         annotate(geom = 'text',
                  label=txtLower,
                  y = lowerT-5,
                  x=0.2,
                  angle=0
+                 ,size =2
                  ,colour ='purple')+ # text angle# text angle 
         geom_hline(yintercept = md,
                      color='blue',
@@ -304,6 +309,7 @@ viobox_ann=viobox +
                      y = md-7,
                      x=0.5,
                      angle=0
+                   ,size =2
                      ,colour ='blue') # text angle
 
 

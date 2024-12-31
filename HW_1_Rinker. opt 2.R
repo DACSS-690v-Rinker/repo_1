@@ -26,9 +26,6 @@ colnames(eduwa)
 str(eduwa,width = 70,strict.width='cut')
 str(eduwa)
 
-eduwa$Student.Teacher.Ratio
-
-
 unique_schools = length(unique(eduwa$NCES.School.ID))
 missing_data =  sum(is.na(eduwa$Student.Teacher.Ratio))
 
@@ -38,7 +35,7 @@ summary(eduwa$Student.Teacher.Ratio)
   base = ggplot (eduwa, aes (y=  Student.Teacher.Ratio))
 
 # Adding titles and  source :
-titleText='Large variability of teacher/stiudent ratio across WA?'
+titleText='Large variability of teacher/stiudent ratio across WA'
 sub_titleText='Washington State - 2019'
 sourceText='Source: US Department of Education'
 
@@ -235,10 +232,7 @@ h1_ann
 
 # Combining  histogram and boxplot in one visual: ---------------
 
-install.packages ("ggpubr")
-
-
-ggarrange(b1_newGrid_axisText, h1_ann, align='v',ncol = 1,heights = 3:2)
+ggarrange(b2_newGrid_axisText, h1_ann, align='v',ncol = 1,heights = 3:2)
 
 # Alternative violin plot: --------------------
 

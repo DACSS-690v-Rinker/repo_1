@@ -35,7 +35,7 @@ summary(eduwa$Student.Teacher.Ratio)
   base = ggplot (eduwa, aes (y=  Student.Teacher.Ratio))
 
 # Adding titles and  source :
-titleText='Large variability of teacher/stiudent ratio across WA'
+titleText='Large variability of teacher/student ratio across WA'
 sub_titleText='Washington State - 2019'
 sourceText='Source: US Department of Education'
 
@@ -192,7 +192,7 @@ Kurt(eduwa$Student.Teacher.Ratio,
 sk=Skew(eduwa$Student.Teacher.Ratio,
         na.rm = T)
 
-# This data us hughly concentrated around the center and skewed to the right. 
+# This data us highly concentrated around the center and skewed to the right. 
 
 # Histogram: -------------------------
 range(eduwa$Student.Teacher.Ratio)

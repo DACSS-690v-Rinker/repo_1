@@ -9,7 +9,7 @@ output:
 library(flexdashboard) # always
 ```
 
-## Sidebar {.sidebar}
+## References {.sidebar}
 
 
 Preparing the dashboard based on the instructions given at @magallanes_reyes_data_2022, and @garrick_aden-buie_flexdashboard_nodate.
@@ -17,27 +17,27 @@ Preparing the dashboard based on the instructions given at @magallanes_reyes_dat
 ## Column {.tabset .tabset-fade}
 
 
-### Worst barplot
+### Homework 1.Univariate numerical data.
 
 ```{r}
-readRDS("del1Draft.rds")
+readRDS("HW_1_Rinker.rds")
 ```
 
 
-### Worst histogram
+### Homework 2. Bivariate relationships II: Categorical-Numerica data.
 
 ```{r}
-# readRDS("del2Draft.rds")
+readRDS("HW_2_Rinker.rds")
 ```
 
-### Worst scatterplot
+### Homework 3.
 
 ```{r}
 # readRDS("del3Draft.rds")
 ```
 
 
-### Worst map
+### Homework 4.
 
 ```{r}
 # readRDS("del4Draft.rds")

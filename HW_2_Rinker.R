@@ -292,13 +292,26 @@ bars=base +
   scale_colour_manual(values=c("black","red", "blue"))
 
 
-bars + facet_grid(~stats) + coord_flip() 
+Stat_segments <- bars + facet_grid(~stats) + coord_flip() 
+
+
+# Adding titles and  source :------------------------
+titleText='Age .....'
+sub_titleText='subtitle '
+sourceText='Source: Massachusetts State Police arrest records'
+
+base =base + 
+  geom_boxplot() +
+  labs(title=titleText,
+       subtitle = sub_titleText,
+       # x =NULL,  #x.AxisText
+       y = NULL, #y.AxisText
+       caption = sourceText)
 
 
 
 
-
-
+saveRDS(Stat_segments, file = "HW_2_Rinker.rds")
 
 
 

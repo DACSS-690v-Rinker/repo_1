@@ -34,6 +34,7 @@ readRDS("HW_2_Rinker.rds")
 
 ```{r}
 # readRDS("del3Draft.rds")
+
 ```
 
 

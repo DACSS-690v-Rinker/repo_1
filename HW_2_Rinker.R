@@ -65,6 +65,7 @@ sk = Skew(arrests$Age, na.rm = T)
 #Plotting error bars ------------------
 baseMEANs=ggplot(arrests, aes(x=arrest_type,
                                     y=Age)) 
+
 pointMEANS=baseMEANs + geom_point(stat="summary") 
 pointMEANS 
 ErrorPlot=pointMEANS + geom_errorbar(stat="summary") 
@@ -230,7 +231,8 @@ barDodge + geom_text(size = 4,
 
 
 # Use of faceted bars: 
-bars=base + geom_bar(aes(y=stat.value,fill=stats),
+bars=base +
+    geom_bar(aes(y=stat.value,fill=stats),
                      stat = 'identity', width = 0.3,
                      show.legend = F) +
   geom_text(size = 6,
@@ -254,14 +256,10 @@ bars=base + geom_point(aes(y=stat.value,fill=stats),
                    yend = stat.value, 
                    xend = arrest_type), 
                color = "grey50") 
-
-
 bars =bars + facet_grid(~stats) + coord_flip() 
 bars
 # Moving text location: 
 bars + scale_y_continuous(limits = c(0,100))
-
-
 
 bars=base + 
   geom_text(size = 5,hjust=1,vjust=-0.1, 
@@ -272,13 +270,12 @@ bars=base +
                    x = arrest_type, 
                    yend = stat.value, 
                    xend = arrest_type), 
-               color = "grey50") 
+               color = "grey50") +
+  facet_grid(~stats) + coord_flip() 
 
 
-bars + facet_grid(~stats) + coord_flip() 
-
-#Customizing colors :
-bars=base + 
+#Customizing colors :  -----------------------------
+bars<- bars + 
   geom_text(size = 5,hjust=1,vjust=-0.1, 
             aes(y=stat.value,
                 label=round(stat.value,1),
@@ -289,29 +286,72 @@ bars=base +
                    yend = stat.value, 
                    xend = arrest_type), 
                color = "grey50") +
-  scale_colour_manual(values=c("black","red", "blue"))
-
-
-Stat_segments <- bars + facet_grid(~stats) + coord_flip() 
+  scale_colour_manual(values=c("black","red", "blue"))+
+   facet_grid(~stats) + coord_flip() 
 
 
 # Adding titles and  source :------------------------
-titleText='Age .....'
-sub_titleText='subtitle '
+titleText="Felonies Are Associated with Lower Age Groups"
+sub_titleText='A Comparison of Arrest Types'
 sourceText='Source: Massachusetts State Police arrest records'
 
-base =base + 
-  geom_boxplot() +
+bars =bars + 
   labs(title=titleText,
        subtitle = sub_titleText,
        # x =NULL,  #x.AxisText
        y = NULL, #y.AxisText
        caption = sourceText)
 
+bars
+#Removing redundant axis lables
+final_plot <- bars+
+              labs(title=titleText,
+                   subtitle = sub_titleText,
+                   # x =NULL,  #x.AxisText
+                   y = NULL, #y.AxisText
+                   caption = sourceText)+
+              theme(
+                    axis.ticks.y = element_blank(),
+                    axis.title.y = element_blank())
+final_plot
+
+# Trying to adjust the order of arrest_type
+final_plot<- ggplot(data=summaryBy_long, aes(x =fct_reorder(arrest_type, 
+                                                            stat.value, 
+                                                            .fun = min, 
+                                                            .desc = FALSE, 
+                                                            subset = stats == "Age.min")))+ 
+  theme_light()+ 
+  geom_text(size = 5,hjust=1,vjust=-0.1,
+            aes(y=stat.value,
+                label=round(stat.value,1),
+                color=stats),
+            show.legend = F,
+            fontface='bold') +
+  geom_segment(aes(y = 0, 
+                   x = arrest_type, 
+                   yend = stat.value, 
+                   xend = arrest_type), 
+               color = "grey50") +
+  scale_colour_manual(values=c("black","red", "blue"))+
+  facet_grid(~stats) + 
+  
+  labs(title=titleText,
+       subtitle = sub_titleText,
+       x =NULL,  #x.AxisText
+       y = NULL, #y.AxisText
+       caption = sourceText)+
+  theme(
+    axis.ticks.y = element_blank(),
+    axis.title.y = element_blank())+
+  
+  coord_flip()+
+  scale_y_discrete(limits = levels(fct_reorder(summaryBy_long$arrest_type, summaryBy_long$stat.value)))
+final_plot
 
 
 
-saveRDS(Stat_segments, file = "HW_2_Rinker.rds")
+saveRDS(final_plot, file = "HW_2_Rinker.rds")
 
 
 

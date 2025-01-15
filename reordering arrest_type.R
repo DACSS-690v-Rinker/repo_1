@@ -85,5 +85,5 @@ final_plot<- ggplot(data=summaryBy_long, aes(x =arrest_type))+
                                                summaryBy_long$stat.value, mean)))
 final_plot
 
-
+saveRDS(final_plot, file = "HW_2_Rinker.rds")
 

@@ -33,7 +33,7 @@ arrests<-arrests%>%
 table ( arrests$arrest_type)
 
 ## Keeping only complete data
-
+arrests=arrests[complete.cases(arrests),]
 summaryBy =aggregate(data=arrests,
                      Age ~arrest_type,
                      FUN = function(x) {c(min = min(x),
@@ -53,11 +53,9 @@ titleText="Felonies Are Associated with Lower Age Groups"
 sub_titleText='A Comparison of Arrest Types'
 sourceText='Source: Massachusetts State Police arrest records'
 
-final_plot<- ggplot(data=summaryBy_long, aes(x =fct_reorder(arrest_type, 
-                                                            stat.value, 
-                                                            .fun = min, 
-                                                            .desc = FALSE, 
-                                                            subset = stats == "Age.min")))+ 
+
+
+final_plot<- ggplot(data=summaryBy_long, aes(x =arrest_type))+ 
   theme_light()+ 
   geom_text(size = 5,hjust=1,vjust=-0.1,
             aes(y=stat.value,
@@ -83,9 +81,9 @@ final_plot<- ggplot(data=summaryBy_long, aes(x =fct_reorder(arrest_type,
     axis.title.y = element_blank())+
   
   coord_flip()+
-  scale_y_discrete(limits = levels(fct_reorder(summaryBy_long$arrest_type, summaryBy_long$stat.value)))
+  scale_x_discrete(limits = levels(fct_reorder(summaryBy_long$arrest_type, 
+                                               summaryBy_long$stat.value, mean)))
 final_plot
 
 
 
-saveRDS(final_plot, file = "HW_2_Rinker.rds")

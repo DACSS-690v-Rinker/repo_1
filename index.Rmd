@@ -10,7 +10,7 @@ library(flexdashboard) # always
 ```
 
 ## References {.sidebar}
-
+ 
 
 Preparing the dashboard based on the instructions given at @magallanes_reyes_data_2022, and @garrick_aden-buie_flexdashboard_nodate.
 

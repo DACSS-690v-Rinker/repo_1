@@ -30,10 +30,10 @@ readRDS("HW_1_Rinker.rds")
 readRDS("HW_2_Rinker.rds")
 ```
 
-### Homework 3.
+### 3. Rurality map of Ma and  ARC PBRN clinic locations.
 
 ```{r}
-# readRDS("del3Draft.rds")
+ readRDS("HW_3_Rinker.rds")
 
 ```
 

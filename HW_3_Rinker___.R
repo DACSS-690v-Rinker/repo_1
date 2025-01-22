@@ -53,6 +53,7 @@ base + geom_sf(fill='black') # plot the geometry
 
 # ma_zips<-ma_zips %>% 
 #   mutate (ma_zips =factor(ZCTA5CE10) )
+
 #  Merging Ma map and  data  ---------
 names(ma_zips)
 names(zip_population_data)
@@ -78,21 +79,35 @@ MAP
 range (merged_data$density)
 summary(merged_data$density)
 
-# The range of density is too great to visualize thedifferences within rural areas of MA.
- # I  am going to compress the upper levels of density to bring the entire scale down.
-merged_data<-merged_data %>%
-mutate (density_cut = ifelse(density>500, 500,density ))
-summary(merged_data$density_cut)
+# Discretizing -------------------------------
+
+# The range of density is too great to visualize differences within rural areas of MA.
+ fivenum(merged_data$density)
+summary(merged_data$density)
+
+ # I  am going to discretize the upper levels of density to bring the entire scale down.
+
+# merged_data<-merged_data %>%
+# mutate (density_cat = ifelse(density>500, 500,density ))
+# summary(merged_data$density_cat)
+# vector of data breaks
+customCuts=c(0,10,100,1000,10000, 100000)
+
+merged_data$density_cat=cut(merged_data$density,
+                                     breaks=customCuts,
+                                     include.lowest = T,
+                                     dig.lab = 5)
+summary(merged_data$density_cat)
 
 titleText<- "Rurality map of Massachussetts"
 sub_titleText<- "by zip code"
 sourceText <- "Source: US Census Bureau (https://data.census.gov)"
 
-MAP_cut=ggplot(data = merged_data) +
+MAP_cat<- ggplot(data = merged_data) +
   geom_sf(
-    aes(fill=density_cut), #variable for coloring geometry
+    aes(fill=density_cat), #variable for coloring geometry
     color=NA)+ # no borders
-  scale_fill_viridis_c(direction = -1)+
+  scale_fill_brewer(palette = "YlOrRd") +
   labs(title=titleText,
        subtitle = sub_titleText,
        fill = "Density Category\n (people/km2)",  # Title for the legend
@@ -104,7 +119,6 @@ MAP_cut=ggplot(data = merged_data) +
     axis.title.x = element_blank(), # Remove x-axis title
     axis.title.y = element_blank()  # Remove y-axis title 
   )
-MAP_cut
+MAP_cat
 
-
-saveRDS(MAP_cut, file = "HW_3_Rinker.rds")
+saveRDS(MAP_cat, file = "HW_3_Rinker.rds")

@@ -16,7 +16,6 @@ library(sf)
 
 
 zip_pop_codebook<- as_tibble (read_excel("C:\\Users\\RinkerD\\OneDrive - UMass Chan Medical School\\FMCH\\1. ARC - PBRN\\UMMS clinical sites database\\ARC-\\source files\\MA_ZIP_population.xlsx" , sheet = "code_book"))
-names(clinics)
 
 # population<- as_tibble (read_excel("C:\\Users\\RinkerD\\OneDrive - UMass Chan Medical School\\FMCH\\1. ARC - PBRN\\UMMS clinical sites database\\ARC-\\source files\\MA_ZIP_population.xlsx" , sheet = "MA_ZIP_population")) 
 #   select (GEO_ID,NAME ,DP05_0001E)
@@ -34,7 +33,6 @@ filter(zip_code != "Geographic Area Name",zip_code != "Massachusetts" ) %>%
 
 unique_zip_count <- length(unique(population$zip_code)) # has to be 538 physical codes 
 
-
 summary(population$population)
 class(population$population)
 # Getting a map for base layer: -------------------------------------------
@@ -49,10 +47,6 @@ base=ggplot(data = ma_zips) # map to use
 
 
 #  Merging Ma map and  data  ---------
-names(ma_zips)
-names(zip_population_data)
-names(clinics)
-str(merged_data)
 
 merged_data=merge(ma_zips,population,
                      by.x='ZCTA5CE10', # 
@@ -102,15 +96,7 @@ MAP
 
 # Discretizing density  -------------------------------
 
-# The range of density is too great to visualize differences within rural areas of MA.
-
-
- # I  am going to discretize the upper levels of density to bring the entire scale down.
-
-# merged_data<-merged_data %>%
-# mutate (density_cat = ifelse(density>500, 500,density ))
-# summary(merged_data$density_cat)
-# vector of data breaks
+# The range of density is too great to visualize differences within rural areas of MA. I  am going to discretize the upper levels of density to bring the entire scale down.
 customCuts=c(0,10,100,1000,10000, 100000)
 
 merged_data$density_cat=cut(merged_data$density,
@@ -118,15 +104,11 @@ merged_data$density_cat=cut(merged_data$density,
                                      include.lowest = T,
                                      dig.lab = 5)
 summary(merged_data$density_cat)
-#Labels 
 # labels
 labels =c("up to 10",">10 to 100", ">100 to 1000", ">1000 to 10K" , '10K to 100K'  )
 
-
 table(merged_data$density_cat)
 levels(merged_data$density_cat)=labels
-
-
 
 titleText<- "Rurality map of Massachussetts"
 sub_titleText<- "by zip code"
@@ -268,9 +250,8 @@ map10000=merged_data[merged_data$density_cat==labels[4],]
 map100000=merged_data[merged_data$density_cat==labels[5],]
 
 
-PuOr=c("#FFA501","#FFD700", "#E4D69C",'#b2abd2','#5e3c99')
+PuOr=c("#FFA501","#FFD700", "#E4D69D",'#b2abd2','#5e3c99')
 
-range(merged_data$density  )
 # one layer per group
 layer1 <- leaflet() %>% 
   addTiles() %>%
@@ -300,51 +281,37 @@ final_MAP= layer1_2_3_4%>%addPolygons(data=map100000,
                                        color=PuOr[5],fillOpacity = 1,stroke = F,
                                        group = labels[5])
 
-final_MAP
-# textFun="function(btn, map){map.setView([42.2896832, -71.7877932],9)}"
-# 
-# final_MAP= final_MAP %>%
-#   addEasyButton(
-#     easyButton(icon="fa-home", # a symbol
-#                title="Zoom to Level 1",
-#                onClick=JS(textFun)))
-# 
-# final_MAP
-
-# row_for_01605 <- merged_data[merged_data$ZCTA5CE10  == "01605", ]
-
-
 # Adding filtered legend
-final_MAP=final_MAP %>% addLayersControl(
+final_MAP <- final_MAP %>% 
+  addLayersControl(
   overlayGroups = labels,
   options = layersControlOptions(collapsed = FALSE))
 
-final_MAP<- final_MAP %>%
+final_MAP_<- final_MAP %>%
   addCircleMarkers(
     data = clinics, # Your dataset with lat/lon
     lat = ~lat, # Column name for latitude
     lng = ~lon, # Column name for longitude
-    radius = 1, # Marker size
+    radius = 3, # Marker size
     color = "blue", # Marker border color
     # fillColor = "red", # Marker fill color
     fillOpacity = 0.7# Transparency of the marker
-    # , popup = ~location_name # Column name for popup text
-  ) %>% addTiles() %>%
+    # , popup = ~s_name # Column name for popup text
+    
+    ,label = ~paste(s_name, ", RUCA:", RUCA1), # Hover-over label
+    labelOptions = labelOptions(
+      style = list("font-weight" = "bold", "color" = "black"),
+      textsize = "12px",
+      direction = "auto"
+    )
+       ) %>% addTiles() %>%
   addControl("<h3 style='text-align:center;'> MA rurality and ARC clinics locations <br> Source: U.S. Census Bureau </h3>", position = "bottomleft")
 
-
-  # addLegend(data=merged_data,
-  #           position = "bottomright",
-  #           pal = paletteFun,
-  #           values = ~density_cat,
-  #           title = "MA rurality map and ARC clinics",
-  #           opacity = 1) 
-
-final_MAP
+final_MAP_
 
 
 # Final file  ------------------------------
-saveRDS(final_MAP, file = "HW_3_Rinker.rds")
+saveRDS(final_MAP_, file = "HW_3_Rinker.rds")
 
 
 
